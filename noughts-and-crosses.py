@@ -1,25 +1,21 @@
 board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
-# print(board)
 
-for i in board: 
-    print(i)
+currentPlayer = "X"
 
-playerX = input("x | Введіть свій хід (2 числа через пробіл, 1 число це - рядок, а 2 число розташування в рядку): ")
-firstSymbolX = int(playerX[0])
-secondSymbolX = int(playerX[2])
-board[firstSymbolX][secondSymbolX] = "X"
+for moveNumber in range(5, 10):  
+    print("Хід гравця", currentPlayer)
+    move = input("Введіть рядок і стовпець через пробіл (наприклад: 1 2): ")
 
-for i in board: 
-    print(i)
+    row = int(move[0])
+    col = int(move[2])
 
-playerO = input("o | Введіть свій хід (2 числа через пробіл, 1 число це - рядок, а 2 число розташування в рядку): ")
-firstSymbolO = int(playerO[0])
-secondSymbolO = int(playerO[2])
+    if board[row][col] != " ":
+        print("Клітина зайнята! Спробуйте ще раз.")
+        continue
 
-if board[firstSymbolO][secondSymbolO] != " ":
-    print("Клітина занята! Спробуйте ще раз.")
+    board[row][col] = currentPlayer
 
-board[firstSymbolO][secondSymbolO] = "O"
+    for i in board:
+        print(i)
 
-for i in board: 
-    print(i)
+    winner = " "
