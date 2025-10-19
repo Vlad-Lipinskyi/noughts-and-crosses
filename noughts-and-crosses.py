@@ -1,23 +1,17 @@
-# Створили поле гри
 board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 for i in board:
-        print(i)
+    print(i)
 
-# Хід першого гравця
 currentPlayer = "X"
 
-# Цикл інпута для запиту куди хоче походити гравець
-for moveNumber in range(0, 10):  
+for moveNumber in range(0, 9):  
     print("Хід гравця", currentPlayer)
-    move = input("Введіть рядок і стовпець через пробіл (наприклад: 1 2): ")
+    move = input("Введіть рядок і стовпець через пробіл (наприклад: 0 2): ")
 
-
-# Записали хід гравця
     row = int(move[0])
     col = int(move[2])
 
-# Перевірка чи занята клітинка
     if board[row][col] != " ":
         print("Клітина зайнята! Спробуйте ще раз.")
         continue
@@ -48,30 +42,42 @@ for moveNumber in range(0, 10):
 
     draw = []
 
-    for rowDraw in range(3):
-        if board[i][0] != board[i][1] != board[i][2]:
-            draw.append("Нічия")
-
-    # for j in range(3):
-    #     if board[0][j] != board[1][j] != board[2][j]:
-    #         draw.append("Нічия")
-
     if board[0][0] != board[1][1] != board[2][2]:
         draw.append("Нічия")
     if board[0][2] != board[1][1] != board[2][0]:
         draw.append("Нічия")
-        
+
+    if board[0][0] != board[0][1] != board[0][2]:
+        draw.append("Нічия")
+    if board[1][0] != board[1][1] != board[1][2]:
+        draw.append("Нічия")
+    if board[2][0] != board[2][1] != board[2][2]:
+        draw.append("Нічия")
+
+    if board[0][0] != board[1][0] != board[2][0]:
+        draw.append("Нічия")
+    if board[0][1] != board[1][1] != board[2][1]:
+        draw.append("Нічия")
+    if board[0][2] != board[1][2] != board[2][2]:
+        draw.append("Нічия")
+
     countDraw = draw.count("Нічия")
 
-    if countDraw == 3:
-        print("Нічия!")
-    print(countDraw)
+    if countDraw == 8:
+        empty_found = False
 
+        for r in range(3):
+            for c in range(3):
+                if board[r][c] == " ":
+                    empty_found = True
+
+        if empty_found == False and winner == " ":
+            print("Нічия!")
+            break
 
     if currentPlayer == "X":
         currentPlayer = "O"
     else:
         currentPlayer = "X"
-
 
 print("Гру завершено!")
