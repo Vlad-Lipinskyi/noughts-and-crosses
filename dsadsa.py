@@ -1,3 +1,5 @@
+import random
+
 board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 for i in board:
@@ -5,12 +7,24 @@ for i in board:
 
 currentPlayer = "X"
 
+mode = input("Виберіть режим гри (1 - гравець проти гравця, 2 - проти комп'ютера): ")
+
 for moveNumber in range(0, 9):  
     print("Хід гравця", currentPlayer)
-    move = input("Введіть рядок і стовпець через пробіл (наприклад: 0 2): ")
 
-    row = int(move[0])
-    col = int(move[2])
+    if mode == "2" and currentPlayer == "O":
+        print("Хід комп'ютера...")
+        empty_cells = []
+        for r in range(3):
+            for c in range(3):
+                if board[r][c] == " ":
+                    empty_cells.append((r, c))
+
+        row, col = random.choice(empty_cells)
+    else:
+        move = input("Введіть рядок і стовпець через пробіл (наприклад: 0 2): ")
+        row = int(move[0])
+        col = int(move[2])
 
     if board[row][col] != " ":
         print("Клітина зайнята! Спробуйте ще раз.")
@@ -74,10 +88,10 @@ for moveNumber in range(0, 9):
         if empty_found == False and winner == " ":
             print("Нічия!")
             break
-
+        
     if currentPlayer == "X":
         currentPlayer = "O"
     else:
         currentPlayer = "X"
 
-print("Гру завершено!")     
+print("Гру завершено!")
